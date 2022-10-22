@@ -1,0 +1,56 @@
+﻿@model MRTOnlineTicketingSystem.Models.User
+<head>
+    <title>Login</title>
+</head>
+<body>
+
+    <h1> Login</h1>
+
+    @using (Html.BeginForm())
+    {
+
+
+        @if (ViewBag.error == 1)
+        {
+            <div class="alert alert-danger">
+                <p>You have enter the wrong password for this email!</p>
+            </div>
+        }
+        else if (ViewBag.error == 2)
+        {
+            <div class="alert alert-danger">
+                <p>User not found!</p>
+            </div>
+        }
+        
+        @if (TempData["error1"] != null)
+        {
+       
+            <div class="alert alert-danger">
+                <p>Please login first before booking a ticket</p>
+            </div>
+        }
+
+        <div class=" row">
+            <p class="col-md-6">
+                <label> @Html.DisplayNameFor(x => x.Email)</label>
+                @Html.TextBoxFor(x => x.Email, new { @class = "form-control" })
+                @Html.ValidationMessageFor(x => x.Email, "", new { @class = "text-danger" })
+            </p>
+        </div>
+
+        <div class=" row">
+            <p class="col-md-6">
+                <label> @Html.DisplayNameFor(x => x.Password)</label>
+                @Html.PasswordFor(x => x.Password, new { @class = "form-control" })
+                @Html.ValidationMessageFor(x => x.Password, "", new { @class = "text-danger" })
+            </p>
+        </div>
+
+
+        <p> <button type="submit" value="Login" class="btn-success btn-md" >Login </button>&nbsp;<button class="btn-warning btn-md">@Html.ActionLink("Register", "Register")</button></p>
+       
+        <p></p>
+    }
+</body>
+

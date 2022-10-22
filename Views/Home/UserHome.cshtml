@@ -1,0 +1,97 @@
+﻿@model MRTOnlineTicketingSystem.Models.MRTTicket;
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+
+</head>
+<body id="page-top">
+    <header>
+        <img src="~/Images/Banner.jpg" style=" margin-left: auto; margin-right: auto; padding-bottom:30px; width: 100%; height:20%" />
+    </header>
+
+    <section class="page-section">
+        <div class="container card">
+
+            <div class="row text-center">
+                <div class="col-md-4">
+
+                    <h4 class="my-3">Buy ticket</h4>
+                    <p class="text-muted">@Html.ActionLink("Buy ticket", "TicketForm", "User", null, new { target = "_blank" })</p>
+                </div>
+                <div class="col-md-4">
+                    <h4 class="my-3">Login</h4>
+                    <p class="text-muted">@Html.ActionLink("Login", "Login", "User", null, new { target = "_blank" })</p>
+                </div>
+                <div class="col-md-4">
+                    <h4 class="my-3">Register</h4>
+                    <p class="text-muted">@Html.ActionLink("Register Now!", "Register", "User", null, new { target = "_blank" })</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <br />
+
+    <br />
+    <section class="page-section bg-light">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="section-heading text-uppercase">KAJANG ROUTE</h2>
+                <h5 class="section-subheading text-muted">The 51km MRT Sungai Buloh-Kajang (SBK) Line begins from Sungai Buloh MRT station, located to the north-west of Kuala Lumpur, and runs through the city centre of Malaysia’s capital city before ending in Kajang MRT station, a fast developing town to the south-east of the city.</h5>
+            </div>
+            <div class="row">
+
+
+                <img src="~/Images/KajangRoute.png" style=" margin-left: auto; margin-right: auto; padding-bottom:30px; width: 90%;" />
+
+            </div>
+        </div>
+    </section>
+    <br />
+
+    <section class="page-section">
+        <div class=" card container">
+            <div class="text-center">
+                <h2 class="section-heading text-uppercase">MRT Fare</h2>
+                <h3 class="section-subheading text-muted">Check ticket rate to plan ahead </h3>
+
+                @using (Html.BeginForm())
+                {
+                    @if (ViewBag.ErrorMsg != null)
+                    {
+                        <p class="text-left alert-danger"> @ViewBag.ErrorMsg</p>
+                    }
+                    <p class="col-6 ">
+                        <label>@Html.DisplayNameFor(x => x.CurrentLocationIndex) </label>
+                        @Html.DropDownListFor(x => x.CurrentLocationIndex, new SelectList(Model.DictStation, "Key", "Value"), "Select Station", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.CurrentLocationIndex, "", new { @class = "text-danger" })
+
+                    </p>
+                    <p class="col-6">
+                        <label>@Html.DisplayNameFor(x => x.DestinationLocationIndex) </label>
+                        @Html.DropDownListFor(x => x.DestinationLocationIndex, new SelectList(Model.DictStation, "Key", "Value"), "Select Station", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.DestinationLocationIndex, "", new { @class = "text-danger" })
+
+                    </p>
+                    <p>
+                        <input type="submit" value="Check" class="btn-success btn-md" />
+                    </p>
+                }
+
+                @if (ViewBag.Rate != null)
+                {
+                    <p class="text-left alert-success"> Ticket price is @ViewBag.Rate</p>
+                }
+            </div>
+
+        </div>
+
+    </section>
+
+
+</body>
+</html>
